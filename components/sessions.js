@@ -139,46 +139,7 @@ class Sessions extends React.Component {
     console.log("render");
     return (
       <View style={styles.card} >
-        <Modal
-            animated={true}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {this._setModalVisible(false)}}
-            >
-          <View style={[styles.modalContainer, modalBackgroundStyle]}>
-            <Button
-                onPress={this._setModalVisible.bind(this, false)}
-                style={styles.modalButton}>
-              Close
-            </Button>
-            <View style={styles.header}>
-              <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
-            </View>
-              <View style={styles.inputs}>
-                <View style={styles.inputContainer}>
-                  <Image style={styles.inputUsername} source={{uri: 'http://i.imgur.com/iVVVMRX.png'}}/>
-                  <TextInput
-                      style={[styles.input, styles.whiteFont]}
-                      placeholder="Username"
-                      placeholderTextColor="#FFF"
-                      value={this.state.username}
-                      />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Image style={styles.inputPassword} source={{uri: 'http://i.imgur.com/ON58SIG.png'}}/>
-                  <TextInput
-                      password={true}
-                      style={[styles.input, styles.whiteFont]}
-                      placeholder="Pasword"
-                      placeholderTextColor="#FFF"
-                      value={this.state.password}
-                      />
-                </View>
-              </View>
-            <View style={styles.signin}>
-              <Text style={styles.whiteFont} onPress={this._setModalVisible.bind(this, false)}>Sign In</Text>
-            </View>
-          </View>
-        </Modal>
+
 
         <View style={styles.init}>
           <Text style={styles.initText}>{ session.course_name[0] }</Text>
