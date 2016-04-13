@@ -53,7 +53,7 @@ render() {
         <TabBarIOS.Item
           title="Profile"
           selected={this.state.selectedTab === 'profile'}
-          systemIcon="contacts"
+          systemIcon="more"
           onPress={() => {
                 this.setState({
                     selectedTab: 'profile',

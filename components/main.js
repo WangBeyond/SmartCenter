@@ -8,40 +8,58 @@ var {
   StyleSheet,
   View,
   Text,
-  NavigatorIOS,
-  Component
+  Navigator,
+  Component,
+    TouchableHighlight
 } = React;
  
-
+var NavigatioBarRouteMapper = {
+  LeftButton: function(route, navigator, index, navState) {
+    if (index > 0) {
+      return (
+        <TouchableHighlight
+            style={styles.leftNavButton}
+          underlayColor="transparent"
+          onPress={() => {if (index > 0) navigator.pop(); }}>
+          <Text style={styles.leftNavButtonText}>Back</Text>
+        </TouchableHighlight>
+      )
+    }
+  },
+  Title: function(route, navigator, index, navState) {
+    return <Text style={styles.title}>{route.title? route.title : 'Sessions' }</Text>
+  },
+  RightButton: function(route, navigator, index, navState) {
+    if (route.onPress) {
+      return <Text style={styles.leftNavButtonText}>Back</Text>;
+    } else {
+      return null;
+    }
+  }
+}
 
  
-
 
 class Main extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {navigationBarHidden: false}
-  }
-
-  toggleNavBar() {
-    this.setState({ navigationBarHidden: !this.state.navigationBarHidden });
+  renderScene(route, navigator) {
+    return <route.component {...route.passProps} navigator={navigator} />
   }
 
   render() {
     return (
-      <NavigatorIOS
-        ref="nav"
-        style={styles.nav}
-        itemWrapperStyle={styles.navWrap}
-        navigationBarHidden={this.state.navigationBarHidden}
+      <Navigator
+        style={{flex: 1}}
+        renderScene={this.renderScene}
         initialRoute={{
-          title: 'Sessions',
-         component: Sessions,
-          passProps: {
-          toggleNavBar: this.toggleNavBar.bind(this)
-        }
+          name: 'Sessions',
+          component: Sessions
       }}
+        navigationBar={
+          <Navigator.NavigationBar
+            style={ styles.nav }
+            routeMapper={ NavigatioBarRouteMapper } />
+        }
       />    
     )
   }

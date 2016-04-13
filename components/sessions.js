@@ -12,7 +12,10 @@ var {
   ListView,
   Text,
   TouchableHighlight,
-  Component
+  Component,
+    Modal,
+    TextInput,
+    Image
 } = React;
 
 class Sessions extends React.Component {
@@ -20,6 +23,7 @@ class Sessions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: true,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -28,7 +32,7 @@ class Sessions extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+     this.fetchData();
   }
 
   fetchData() {
@@ -37,8 +41,6 @@ class Sessions extends React.Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'api.producthunt.com',
         'Authorization': 'ycp8PHeKG3pzv83AxX2S'
       }
     };
@@ -57,7 +59,7 @@ class Sessions extends React.Component {
 
   _handleSessionClick(data) {
     this.props.navigator.push({
-      title: "Session",
+      title: "Attendance",
       component: Attendance,
       passProps: {
         session_attendances: data
@@ -89,6 +91,37 @@ class Sessions extends React.Component {
     );
   }
 
+  _setModalVisible(visible) {
+    console.log("set visible "+visible)
+    this.setState({modalVisible: visible});
+    this.forceUpdate();
+  }
+
+  _login() {
+    var that = this;
+    fetch('http://192.168.0.101:3000/api/tutors/signin.json', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "tutor": {
+          "email": "t1@fooyo.sg",
+          "password": "SkyWalker"
+        }
+      })
+    })
+      .then((response) => response.json())
+      .then( (result) => {
+        console.log(result.auth_token);
+          that._setModalVisible(false);
+
+      }).catch ( (error) => {
+      console.log('Request failed', error);
+    });
+  }
+
   renderSession(session) {
     var TouchableElement = TouchableHighlight;
     if (Platform.OS === 'android') {
@@ -98,8 +131,50 @@ class Sessions extends React.Component {
     var endtime = moment(starttime);
     endtime.add( session.duration, 'minute');
 
+
+    var modalBackgroundStyle = {
+      backgroundColor: '#f5fcff',
+    };
+    console.log("render");
     return (
       <View style={styles.card} >
+        <Modal
+            animated={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {this._setModalVisible(false)}}
+            >
+          <View style={[styles.modalContainer]}>
+            <Image style={styles.bg} source={{uri: 'http://i.imgur.com/xlQ56UK.jpg'}} />
+            <View style={styles.header}>
+              <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
+            </View>
+              <View style={styles.inputs}>
+                <View style={styles.inputContainer}>
+                  <Image style={styles.inputUsername} source={{uri: 'http://i.imgur.com/iVVVMRX.png'}}/>
+                  <TextInput
+                      style={[styles.input, styles.whiteFont]}
+                      placeholder="Username"
+                      placeholderTextColor="#FFF"
+                      value={this.state.username}
+                      />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Image style={styles.inputPassword} source={{uri: 'http://i.imgur.com/ON58SIG.png'}}/>
+                  <TextInput
+                      password={true}
+                      style={[styles.input, styles.whiteFont]}
+                      placeholder="Pasword"
+                      placeholderTextColor="#FFF"
+                      value={this.state.password}
+                      />
+                </View>
+              </View>
+            <View style={styles.signin}>
+              <Text style={styles.whiteFont} onPress={this._setModalVisible.bind(this, false)}>Sign In</Text>
+            </View>
+          </View>
+        </Modal>
+
         <View style={styles.init}>
           <Text style={styles.initText}>{ session.course_name[0] }</Text>
         </View>
@@ -109,7 +184,7 @@ class Sessions extends React.Component {
           <Text style={styles.cardDescription}>{session.classroom}</Text>
         </View>
         <TouchableElement style={styles.cardButton} onPress={ this._handleSessionClick.bind(this, session.session_attendances) } >
-          <Text>Edit</Text>
+          <Text style={styles.cardButtonText}>Attendance</Text>
         </TouchableElement>
       </View>
     );
