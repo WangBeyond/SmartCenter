@@ -66,7 +66,7 @@ class Attendance extends React.Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'ycp8PHeKG3pzv83AxX2S'
+        'Authorization': 'N25zFivRbQFax45LfGss'
       },
       body: JSON.stringify({
         "session_attendance": {
@@ -74,8 +74,8 @@ class Attendance extends React.Component {
         }
       })
     }
-    console.log('http://192.168.0.101:3000/api/session_attendances/' + id);
-    fetch('http://192.168.0.101:3000/api/session_attendances/' + id, obj)
+    console.log('http://111.221.109.187/api/session_attendances/' + id);
+    fetch('http://111.221.109.187/api/session_attendances/' + id, obj)
         //.then((response) => response.json())
         .then( (result) => {
 

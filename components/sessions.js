@@ -4,6 +4,7 @@ var React = require('react-native');
 var moment = require('moment');
 var styles = require('../styles');
 var Attendance = require('./attendance');
+var Button = require('./Button');
 
 var {
   Platform,
@@ -41,11 +42,11 @@ class Sessions extends React.Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'ycp8PHeKG3pzv83AxX2S'
+        'Authorization': 'N25zFivRbQFax45LfGss'
       }
     };
 
-    fetch('http://192.168.0.101:3000/api/tutors/2/sessions.json', obj)
+    fetch('http://111.221.109.187/api/tutors/2/sessions.json', obj)
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
@@ -99,7 +100,7 @@ class Sessions extends React.Component {
 
   _login() {
     var that = this;
-    fetch('http://192.168.0.101:3000/api/tutors/signin.json', {
+    fetch('http://111.221.109.187/api/tutors/signin.json', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -143,8 +144,12 @@ class Sessions extends React.Component {
             visible={this.state.modalVisible}
             onRequestClose={() => {this._setModalVisible(false)}}
             >
-          <View style={[styles.modalContainer]}>
-            <Image style={styles.bg} source={{uri: 'http://i.imgur.com/xlQ56UK.jpg'}} />
+          <View style={[styles.modalContainer, modalBackgroundStyle]}>
+            <Button
+                onPress={this._setModalVisible.bind(this, false)}
+                style={styles.modalButton}>
+              Close
+            </Button>
             <View style={styles.header}>
               <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
             </View>
