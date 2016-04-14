@@ -115,8 +115,8 @@ class Sessions extends React.Component {
             <Text style={styles.cardDescription}>{ starttime.format('MMM Do hh:mma') } - {endtime.format('hh:mma')}</Text>
             <Text style={styles.cardDescription}>{session.classroom}</Text>
           </View>
-          <TouchableElement style={styles.cardButton}  >
-            <Text style={styles.cardButtonText}>{session.to_mark? "To Mark" : "Marked" }</Text>
+          <TouchableElement style={styles.cardButton} >
+            <Text style={styles.cardButtonText}>{session.to_mark? "Mark Attendance" : "View Attendance" }</Text>
           </TouchableElement>
         </View>
       </TouchableHighlight>
