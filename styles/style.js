@@ -3,7 +3,6 @@ var {StyleSheet} = React;
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
 
-
 var styles = StyleSheet.create({
   description: {
     fontSize: 20,
@@ -70,8 +69,10 @@ var styles = StyleSheet.create({
   },
   attendCardBottom: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     marginTop: 10
+  },
+  rowGap: {
+    flex: 1
   },
   rowButton: {
     width: 65,
@@ -98,6 +99,13 @@ var styles = StyleSheet.create({
   activeButtonText: {
     color: 'white',
     fontWeight: '500'
+  },
+  centering: {
+    position: 'absolute',
+    left: windowSize.width/2 - 20,
+    top: windowSize.height/2 - 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   init: {
@@ -140,81 +148,6 @@ var styles = StyleSheet.create({
     flex: 1
   },
 
-  modalContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    backgroundColor: 'transparent'
-  },
-  bg: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    width: windowSize.width,
-    height: windowSize.height
-  },
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: .5,
-    backgroundColor: 'transparent'
-  },
-  mark: {
-    width: 150,
-    height: 150
-  },
-  modalButton: {
-    marginTop: 10,
-  },
-  button: {
-    borderRadius: 5,
-    flex: 1,
-    height: 44,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  buttonText: {
-    fontSize: 18,
-    margin: 5,
-    textAlign: 'center',
-  },
-  inputPassword: {
-    marginLeft: 15,
-    width: 20,
-    height: 21
-  },
-  inputUsername: {
-    marginLeft: 15,
-    width: 20,
-    height: 20
-  },
-  inputContainer: {
-    padding: 10,
-    borderWidth: 1,
-    borderBottomColor: '#CCC',
-    borderColor: 'transparent'
-  },
-  inputs: {
-    flex: 0.25,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  signin: {
-    backgroundColor: '#FF3366',
-    padding: 20,
-    alignItems: 'center'
-  },
-  input: {
-    position: 'absolute',
-    left: 61,
-    top: 12,
-    right: 0,
-    height: 20,
-    fontSize: 14
-  },
-  whiteFont: {
-    color: '#FFF'
-  }
 });
 
 module.exports = styles;

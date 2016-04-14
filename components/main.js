@@ -1,8 +1,8 @@
 'use strict';
  
 var React = require('react-native');
-var Sessions = require('./sessions');
-var styles = require('../styles');
+var styles = require('../styles/style');
+var Sessions = require('./SessionList');
 
 var {
   StyleSheet,
@@ -10,7 +10,8 @@ var {
   Text,
   Navigator,
   Component,
-    TouchableHighlight
+    TouchableHighlight,
+    ActivityIndicatorIOS
 } = React;
  
 var NavigatioBarRouteMapper = {
@@ -40,13 +41,14 @@ var NavigatioBarRouteMapper = {
 
  
 
-class Main extends React.Component {
+export class Main extends React.Component {
 
   renderScene(route, navigator) {
     return <route.component {...route.passProps} navigator={navigator} />
   }
 
   render() {
+
     return (
       <Navigator
         style={{flex: 1}}
@@ -60,10 +62,9 @@ class Main extends React.Component {
             style={ styles.nav }
             routeMapper={ NavigatioBarRouteMapper } />
         }
-      />    
+      />
     )
   }
 }
 
 
-module.exports = Main;

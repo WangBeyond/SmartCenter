@@ -5,65 +5,50 @@
 
 
 var React = require('react-native');
-var Main = require('./components/main');
-var Profile = require('./profile.ios');
 
 var {
   AppRegistry,
-  TabBarIOS,
-  Component
+  Navigator,
+  Component,
+    View,
+    Text
 } = React;
+
+import { Login } from './components/Login';
+import { TabBar } from './components/TabBar';
+
+
+var BasicConfig = Navigator.SceneConfigs.FloatFromRight;
+var CustomSceneConfig = Object.assign({}, BasicConfig, {
+  springTransition: 100,
+  springFriction: 1
+})
 
 class SmartCenter extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTab: 'sessions'
-    };
+  _renderScene(route, navigator) {
+    console.log(route.id);
+    if (route.id == 1) {
+      return <Login navigator={navigator}/>;
+    } else if (route.id == 2) {
+      return <TabBar navigator={navigator}/>;
+    }
+  }
+
+  _configureScene(route) {
+    return CustomSceneConfig;
+  }
+
+  render() {
+      return (
+          <Navigator
+            initialRoute={{ id: 1 }}
+            renderScene={this._renderScene}
+            configureScene={this._configureScene} />
+      )
   }
 
 
-  login() {
-    fetch('http://192.168.0.101:3000/api/tutors/signin.json')
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          auth_token: this.state.dataSource.cloneWithRows(responseData.auth_token)
-        });
-      })
-      .done();
-  }
-
-render() {
-    return (
-
-      <TabBarIOS selectedTab={this.state.selectedTab}>
-        <TabBarIOS.Item
-          title="Main"
-          selected={this.state.selectedTab === 'sessions'}
-          systemIcon="featured"
-          onPress={() => {
-              this.setState({
-                  selectedTab: 'sessions',
-              });
-          }}>
-          <Main/>
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
-          title="Profile"
-          selected={this.state.selectedTab === 'profile'}
-          systemIcon="more"
-          onPress={() => {
-                this.setState({
-                    selectedTab: 'profile',
-                });
-          }}>
-          <Profile/>
-        </TabBarIOS.Item>
-      </TabBarIOS>
-    );
-  }
 }
 
 AppRegistry.registerComponent('SmartCenter', () => SmartCenter);

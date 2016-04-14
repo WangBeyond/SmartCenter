@@ -3,7 +3,7 @@
  */
 
 var React = require('react-native');
-var styles = require('../styles');
+var styles = require('../styles/style');
 
 var {
     Modal,
