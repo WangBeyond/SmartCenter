@@ -3,8 +3,8 @@
 var React = require('react-native');
 var moment = require('moment');
 var styles = require('../styles/style');
-var Attendance = require('./AttendanceList');
-var Button = require('./Button');
+var Attendance = require('./attendanceList');
+var Button = require('./button');
 import { BASE_ADDR } from '../settings';
 
 var {

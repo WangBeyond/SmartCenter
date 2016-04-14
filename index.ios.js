@@ -14,8 +14,8 @@ var {
     Text
 } = React;
 
-import { Login } from './components/Login';
-import { TabBar } from './components/TabBar';
+import { Login } from './components/login';
+import { TabBar } from './components/tabBar';
 
 
 var BasicConfig = Navigator.SceneConfigs.FloatFromRight;

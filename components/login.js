@@ -3,7 +3,7 @@
  */
 import React from 'react-native';
 import styles from '../styles/login';
-import { TabBar } from './TabBar'
+import { TabBar } from './tabBar.js'
 import { BASE_ADDR } from '../settings';
 
 var {

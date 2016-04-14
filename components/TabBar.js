@@ -3,8 +3,8 @@
  */
 import React from 'react-native';
 import styles from '../styles/style';
-import { Main } from './Main';
-import { Profile } from './Profile';
+import { Main } from './main';
+import { Profile } from './profile';
 
 var {
     Component,

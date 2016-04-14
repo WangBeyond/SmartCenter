@@ -2,7 +2,7 @@
  
 var React = require('react-native');
 var styles = require('../styles/style');
-var Sessions = require('./SessionList');
+var Sessions = require('./sessionList');
 
 var {
   StyleSheet,
