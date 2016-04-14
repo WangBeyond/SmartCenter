@@ -50,19 +50,19 @@ export class Main extends React.Component {
   render() {
 
     return (
-      <Navigator
-        style={{flex: 1}}
-        renderScene={this.renderScene}
-        initialRoute={{
-          name: 'Sessions',
-          component: Sessions
-      }}
-        navigationBar={
-          <Navigator.NavigationBar
-            style={ styles.nav }
-            routeMapper={ NavigatioBarRouteMapper } />
-        }
-      />
+        <Navigator
+          style={{flex: 1}}
+          renderScene={this.renderScene}
+          initialRoute={{
+            name: 'Sessions',
+            component: Sessions
+        }}
+          navigationBar={
+            <Navigator.NavigationBar
+              style={ styles.nav }
+              routeMapper={ NavigatioBarRouteMapper } />
+          }
+        />
     )
   }
 }

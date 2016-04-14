@@ -6,17 +6,16 @@ import { Button } from 'react-native-material-design';
 import { BASE_ADDR, STATUS } from '../settings';
 
 var {
-    Platform,
     StyleSheet,
     View,
     ListView,
     Text,
     Component,
-    Switch,
     TouchableHighlight,
     AsyncStorage,
     ActivityIndicatorIOS,
-    ScrollView
+    ScrollView,
+    AlertIOS
     } = React;
 
 
@@ -64,9 +63,29 @@ class Attendance extends React.Component {
     );
   }
 
-  updateAttendance(id, status) {
+  _handlePress(id, status) {
+    if (status == 2) {
+      AlertIOS.prompt(
+          'Absent Remark',
+          null,
+          [
+            {text: 'OK', onPress: remark => this.updateAttendance(id, status, remark) },
+          ]
+      )
+    } else {
+      this.updateAttendance(id, status);
+    }
+  }
+
+  updateAttendance(id, status, remark) {
     var that = this;
 
+    var data = {
+        "status": status
+    }
+    if (status == 2 && remark.trim()) {
+      data.remark = remark
+    }
     var obj = {
       method: 'PUT',
       headers: {
@@ -75,9 +94,7 @@ class Attendance extends React.Component {
         'Authorization': this.state.auth_token
       },
       body: JSON.stringify({
-        "session_attendance": {
-          "status": status
-        }
+        "session_attendance": data
       })
     }
     this.setState({animating: true});
@@ -91,6 +108,8 @@ class Attendance extends React.Component {
           console.log('Request failed', error);
         });
   }
+
+
 
   updateUI(id, status) {
     var datacopy = this.data;
@@ -120,16 +139,16 @@ class Attendance extends React.Component {
         </View>
         <View style={styles.attendCardBottom}>
           <TouchableHighlight style={ [styles.rowButton, styles.pendingButton, attendance.status=="pending" && styles.activeButton] }
-                              onPress={this.updateAttendance.bind(this, attendance.id, 0)} >
+                              onPress={this._handlePress.bind(this, attendance.id, 0)} >
             <Text style={[styles.rowButtonText, attendance.status=="pending" && styles.activeButtonText]} >Pending</Text>
           </TouchableHighlight>
           <View style={styles.rowGap}/>
           <TouchableHighlight style={ [styles.rowButton, styles.absentButton, attendance.status=="absent" && styles.activeButton] }
-                              onPress={this.updateAttendance.bind(this, attendance.id, 2)} >
+                              onPress={this._handlePress.bind(this, attendance.id, 2)} >
             <Text style={[styles.rowButtonText, attendance.status=="absent" && styles.activeButtonText]} >Absent</Text>
           </TouchableHighlight>
           <TouchableHighlight style={ [styles.rowButton, styles.attendButton, attendance.status=="attended" && styles.activeButton] }
-                              onPress={this.updateAttendance.bind(this, attendance.id, 1)} >
+                              onPress={this._handlePress.bind(this, attendance.id, 1)} >
             <Text style={[styles.rowButtonText, attendance.status=="attended" && styles.activeButtonText]} >Attended</Text>
           </TouchableHighlight>
         </View>
