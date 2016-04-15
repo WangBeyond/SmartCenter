@@ -33,9 +33,10 @@ class Attendance extends React.Component {
     };
   }
 
+
   componentDidMount() {
     AsyncStorage.getItem('user_info', (err, result) => {
-      this.setState({auth_token: result.auth_token});
+      this.setState({auth_token: JSON.parse(result).auth_token});
     })
     this.data = this.props.session_attendances.slice();
     this.setState({
@@ -101,9 +102,11 @@ class Attendance extends React.Component {
     fetch( BASE_ADDR + 'api/session_attendances/' + id, obj)
         //.then((response) => response.json())
         .then( (result) => {
-          that.setState({animating: false});
-          that.updateUI(id, status);
           console.log(result);
+          that.setState({animating: false});
+          if (result.ok) {
+            that.updateUI(id, status);
+          }
         }).catch ( (error) => {
           console.log('Request failed', error);
         });
