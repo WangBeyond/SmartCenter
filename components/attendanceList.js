@@ -135,20 +135,21 @@ class Attendance extends React.Component {
           <View style={styles.rightContainer}>
             <Text style={styles.cardTitle}>{attendance.student_name}</Text>
             <Text style={styles.cardDescription}>{attendance.student_contact}</Text>
+              <Text style={styles.cardDescription}>{attendance.remark}</Text>
           </View>
         </View>
         <View style={styles.attendCardBottom}>
           <TouchableHighlight style={ [styles.rowButton, styles.pendingButton, attendance.status=="pending" && styles.activeButton] }
-                              onPress={this._handlePress.bind(this, attendance.id, 0)} >
+                              underlayColor="#B5B5B5" onPress={this._handlePress.bind(this, attendance.id, 0)} >
             <Text style={[styles.rowButtonText, attendance.status=="pending" && styles.activeButtonText]} >Pending</Text>
           </TouchableHighlight>
           <View style={styles.rowGap}/>
           <TouchableHighlight style={ [styles.rowButton, styles.absentButton, attendance.status=="absent" && styles.activeButton] }
-                              onPress={this._handlePress.bind(this, attendance.id, 2)} >
+                              underlayColor="#B5B5B5" onPress={this._handlePress.bind(this, attendance.id, 2)} >
             <Text style={[styles.rowButtonText, attendance.status=="absent" && styles.activeButtonText]} >Absent</Text>
           </TouchableHighlight>
           <TouchableHighlight style={ [styles.rowButton, styles.attendButton, attendance.status=="attended" && styles.activeButton] }
-                              onPress={this._handlePress.bind(this, attendance.id, 1)} >
+                              underlayColor="#B5B5B5" onPress={this._handlePress.bind(this, attendance.id, 1)} >
             <Text style={[styles.rowButtonText, attendance.status=="attended" && styles.activeButtonText]} >Attended</Text>
           </TouchableHighlight>
         </View>

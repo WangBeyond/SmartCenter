@@ -18,6 +18,7 @@ var {
     ActivityIndicatorIOS,
     } = React;
 
+
 export class Login extends React.Component {
 
     constructor(){
@@ -71,7 +72,7 @@ export class Login extends React.Component {
             <View style={styles.modalContainer}>
                 <Image style={styles.bg} source={{uri: 'http://i.imgur.com/xlQ56UK.jpg'}} />
                 <View style={styles.header}>
-                    <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
+                    <Image style={styles.mark} source={require('../img/smart_center_blue_bg_transp.png') } />
                 </View>
                 <ActivityIndicatorIOS
                     size="large"
@@ -104,11 +105,10 @@ export class Login extends React.Component {
                         <Text style={styles.redFont}>{this.state.error_msg}</Text>
                     </View>
                 </View>
-                <View style={styles.signin}>
-                    <Text style={styles.whiteFont} onPress={this._handleLogin.bind(this)}>Sign In</Text>
-                </View>
+                <TouchableHighlight style={styles.signin} underlayColor="#B5B5B5" onPress={this._handleLogin.bind(this)} >
+                    <Text style={styles.whiteFont} >Sign In</Text>
+                </TouchableHighlight>
                 <View style={styles.signup}>
-                    <Text style={styles.greyFont}>Don't have an account?<Text style={styles.whiteFont}>  Sign Up</Text></Text>
                 </View>
             </View>
         )

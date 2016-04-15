@@ -20,6 +20,9 @@ export class TabBar extends React.Component {
         };
     }
 
+    popBack() {
+        this.props.navigator.push({id: 1});
+    }
 
     render() {
         return (
@@ -33,7 +36,7 @@ export class TabBar extends React.Component {
                   selectedTab: 'sessions',
               });
           }}>
-                    <Main/>
+                    <Main />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Profile"
@@ -44,7 +47,7 @@ export class TabBar extends React.Component {
                     selectedTab: 'profile',
                 });
           }}>
-                    <Profile/>
+                    <Profile popBack={this.popBack.bind(this)}/>
                 </TabBarIOS.Item>
             </TabBarIOS>
         );

@@ -105,7 +105,7 @@ class Sessions extends React.Component {
 
 
     return (
-      <TouchableHighlight  onPress={ this._handleSessionClick.bind(this, session.session_attendances) } >
+      <TouchableHighlight underlayColor="#B5B5B5" onPress={ this._handleSessionClick.bind(this, session.session_attendances) } >
         <View style={styles.card}>
           <View style={styles.init}>
             <Text style={styles.initText}>{ session.course_name[0] }</Text>

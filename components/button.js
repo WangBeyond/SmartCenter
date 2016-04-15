@@ -3,7 +3,7 @@
  */
 
 var React = require('react-native');
-var styles = require('../styles/style');
+var styles = require('../styles/button');
 
 var {
     Modal,
@@ -12,38 +12,22 @@ var {
     TouchableHighlight,
     } = React;
 
-class Button extends React.Component {
+export class Button extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            active: false,
-        };
     }
 
-    _onHighlight() {
-        this.setState({active: true});
-    }
-
-    _onUnhighlight() {
-        this.setState({active: false});
-    }
 
     render() {
-        var colorStyle = {
-            color: this.state.active ? '#fff' : '#000',
-        };
         return (
             <TouchableHighlight
-                onHideUnderlay={this._onUnhighlight.bind(this)}
-                onPress={this.props.onPress}
-                onShowUnderlay={this._onHighlight.bind(this)}
-                style={[styles.button, this.props.style]}
-                underlayColor="#a9d9d4">
-                <Text style={[styles.buttonText, colorStyle]}>{this.props.children}</Text>
+                style={styles.button}
+                underlayColor="#B5B5B5"
+                onPress={this.props.onPress} >
+                <Text style={styles.buttonText}>{this.props.children}</Text>
             </TouchableHighlight>
         );
     }
 }
 
-module.exports = Button;

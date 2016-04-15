@@ -28,22 +28,6 @@ var styles = StyleSheet.create({
     width: 150,
     height: 150
   },
-  modalButton: {
-    marginTop: 10,
-  },
-  button: {
-    borderRadius: 5,
-    flex: 1,
-    height: 44,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  buttonText: {
-    fontSize: 18,
-    margin: 5,
-    textAlign: 'center',
-  },
   inputPassword: {
     marginLeft: 15,
     width: 20,
@@ -66,7 +50,7 @@ var styles = StyleSheet.create({
     marginBottom: 10,
   },
   signin: {
-    backgroundColor: '#FF3366',
+    backgroundColor: '#00BFB6',
     padding: 20,
     alignItems: 'center'
   },
@@ -94,7 +78,8 @@ var styles = StyleSheet.create({
     color: '#D8D8D8'
   },
   whiteFont: {
-    color: '#FFF'
+    color: '#FFF',
+    fontSize: 18
   },
   centering: {
     alignItems: 'center',
