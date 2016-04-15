@@ -135,9 +135,13 @@ var styles = StyleSheet.create({
   leftNavButton: {
     paddingLeft: 20
   },
-  leftNavButtonText: {
+  navButtonText: {
     fontSize: 16,
-    marginVertical: 10
+    marginVertical: 10,
+    color: '#4FBDF4'
+  },
+  rightNavButton: {
+    paddingRight: 20
   },
   title: {
     fontWeight: '500',

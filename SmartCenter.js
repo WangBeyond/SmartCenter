@@ -5,7 +5,7 @@
 var React = require('react-native');
 import styles from './styles/style';
 import { Login } from './components/login';
-import { TabBar } from './components/tabBar';
+import { Main } from './components/main';
 
 var {
     Navigator,
@@ -42,7 +42,7 @@ class SmartCenter extends Component {
             this.firstLaunch = false;
             return <Login navigator={navigator}/>;
         }
-        return <TabBar navigator={navigator}/>;
+        return <Main navigator={navigator} />;
     }
 
     _configureScene(route) {

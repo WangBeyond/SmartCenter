@@ -11,9 +11,10 @@ var {
   Navigator,
   Component,
     TouchableHighlight,
-    ActivityIndicatorIOS
-} = React;
- 
+    ActivityIndicatorIOS,
+    AsyncStorage,
+    } = React;
+
 var NavigatioBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
     if (index > 0) {
@@ -22,7 +23,7 @@ var NavigatioBarRouteMapper = {
             style={styles.leftNavButton}
           underlayColor="transparent"
           onPress={() => {if (index > 0) navigator.pop(); }}>
-          <Text style={styles.leftNavButtonText}>Back</Text>
+          <Text style={styles.navButtonText}>Back</Text>
         </TouchableHighlight>
       )
     }
@@ -31,17 +32,27 @@ var NavigatioBarRouteMapper = {
     return <Text style={styles.title}>{route.title? route.title : 'Sessions' }</Text>
   },
   RightButton: function(route, navigator, index, navState) {
-    if (route.onPress) {
-      return <Text style={styles.leftNavButtonText}>Back</Text>;
-    } else {
-      return null;
-    }
+    return (
+        <TouchableHighlight
+            style={styles.rightNavButton}
+            underlayColor="transparent"
+            onPress={route.logout}>
+          <Text style={styles.navButtonText} >Logout</Text>
+        </TouchableHighlight>
+    )
   }
 }
 
  
 
 export class Main extends React.Component {
+
+  _logout() {
+    AsyncStorage.removeItem('user_info', (err)=>{
+      this.props.navigator.push({id: 1});
+      console.log(err);
+    })
+  }
 
   renderScene(route, navigator) {
     return <route.component {...route.passProps} navigator={navigator} />
@@ -55,7 +66,8 @@ export class Main extends React.Component {
           renderScene={this.renderScene}
           initialRoute={{
             name: 'Sessions',
-            component: Sessions
+            component: Sessions,
+            logout: this._logout.bind(this),
         }}
           navigationBar={
             <Navigator.NavigationBar
